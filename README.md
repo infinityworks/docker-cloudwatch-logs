@@ -1,11 +1,7 @@
 # Docker CloudWatch Logs
 
-[![Docker Automated build](https://img.shields.io/docker/automated/joshbalfour/cloudwatch-logs.svg?maxAge=2592000)](https://hub.docker.com/r/joshbalfour/cloudwatch-logs/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/joshbalfour/cloudwatch-logs.svg?maxAge=2592000)](https://hub.docker.com/r/joshbalfour/cloudwatch-logs/)
 
-Small (~18 MB) Alpine based Docker container for logging to Amazon CloudWatch Logs.
-
-Auto-built and available from [Docker Hub](https://hub.docker.com/r/joshbalfour/cloudwatch-logs/).
+Small Alpine based Docker container for logging to Amazon CloudWatch Logs.
 
 ## Usage
 
