@@ -1,16 +1,22 @@
-FROM alpine
+FROM alpine:3.7
+LABEL maintainer="Henry McConville <henry.mcconville@infinityworks.com>"
 
-ENV AWS_REGION=us-east-1 LOG_FILE=/aws.conf LOG_GROUP=changeme
-
-RUN apk update && \
-    apk add --no-cache python curl && \
-    curl https://bootstrap.pypa.io/get-pip.py -O && \
-    python get-pip.py 'pip<7.0.0' --no-wheel && \
-    mkdir /var/awslogs && mkdir /var/awslogs/state && mkdir /var/awslogs/etc &&  mkdir /var/awslogs/etc/config  && \
-    pip install awscli-cwlogs && \
-    pip uninstall setuptools pip -y && \
-    apk --purge -v del curl && \
-    rm -rf get-pip.py /var/cache/apk/* /root/.cache/* /usr/share/terminfo
+RUN apk add --update \
+    openssl \
+    ca-certificates \
+    python && \
+    apk --update add --virtual build-dependencies \
+    py-pip \
+    python-dev \
+    build-base && \
+    mkdir -p /var/awslogs/state && \
+    mkdir -p /var/awslogs/etc/config && \
+    pip install --upgrade \
+    --extra-index-url=http://aws-cloudwatch.s3-website-us-east-1.amazonaws.com/ \
+    --trusted-host=aws-cloudwatch.s3-website-us-east-1.amazonaws.com \
+    awscli-cwlogs && \
+    apk del build-dependencies && \
+    rm -rf /var/cache/apk/* /root/.cache/* /usr/share/terminfo
 
 ADD boot.sh /var/awslogs
 
