@@ -1,11 +1,9 @@
 FROM alpine:3.7
 LABEL maintainer="Henry McConville <henry.mcconville@infinityworks.com>"
 
-RUN apk add --update \
-    openssl \
-    ca-certificates \
+RUN apk --update add --no-cache  \
     python && \
-    apk --update add --virtual build-dependencies \
+    apk --update add --no-cache --virtual build-dependencies \
     py-pip \
     python-dev \
     build-base && \
